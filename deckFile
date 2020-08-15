@@ -1,0 +1,19 @@
+import discord
+client = discord.Client()
+
+@client.event
+async def on_message(message):
+    # 送信者がbotである場合は弾く
+    if message.channel.id == 679695015701905466:
+       if message.author.bot:
+        return
+    # ファイルがある場合
+       if message.attachments:
+        for attachment in message.attachments:
+            # Attachmentの拡張子がpng, jpg, jpegのどれかだった場合
+            if attachment.url.endswith(("png", "jpg", "jpeg")):
+                channel = client.get_channel(740770307752853585)
+                await channel.send(message.author.name+"さん: "+message.content)
+                await channel.send(attachment.url)
+                
+client.run('NzQwMDcyMzc4NDA2NTM1MTg5.XyjsHA.Fp1941Ot4VvG4yIvkZqrZmQNGyE')
